@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@100;500&display=swap');
+
+@font-face {
+    font-family: 'BebasNue';
+    src: url('../public/fonts/bebasneue/BebasNeueCyrillicRegular.ttf'),
+         url('../public/fonts/bebasneue/bebasneueregular.ttf'),
+         url(../public/fonts/bebasneue/bebasneueregular.woff),
+         url(../public/fonts/bebasneue/bebasneueregular.woff2);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BebasNue';
+    src: url('../public/fonts/bebasneue/bebasneuebold.woff'),
+    url('../public/fonts/bebasneue/bebasneuebold.ttf'),
+    url('../public/fonts/bebasneue/bebasneuebold.woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HeadLineA';
+    src: url('../public/fonts/headlinea/headlinea-regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo';
+    src: url('../public/fonts/Museo/MuseoSansCyrl-300.eot'),
+    url('../public/fonts/Museo/MuseoSansCyrl-300.ttf'),
+    url('../public/fonts/Museo/MuseoSansCyrl-300.woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo';
+    src: url('../public/fonts/Museo/MuseoSansCyrl-500.eot'),
+    url('../public/fonts/Museo/MuseoSansCyrl-500.ttf'),
+    url('../public/fonts/Museo/MuseoSansCyrl-500.woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo';
+    src: url('../public/fonts/Museo/MuseoSansCyrl-700.eot'),
+    url('../public/fonts/Museo/MuseoSansCyrl-700.ttf'),
+    url('../public/fonts/Museo/MuseoSansCyrl-700.woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo';
+    src: url('../public/fonts/Museo/MuseoSansCyrl-900.eot'),
+    url('../public/fonts/Museo/MuseoSansCyrl-900.ttf'),
+    url('../public/fonts/Museo/MuseoSansCyrl-900.woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../public/fonts/HelveticaNeue/HelveticaNeueCyr-Light.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../public/fonts/HelveticaNeue/HelveticaNeueCyr-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../public/fonts/HelveticaNeue/HelveticaNeueCyr-Heavy.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('../public/fonts/HelveticaNeue/HelveticaNeueCyr-Boldttf');
+    font-weight: 700;
+    font-style: normal;
+}
