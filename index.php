@@ -1,9 +1,53 @@
+<?php 
+    include_once 'form_validate.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      $(function () {
+
+        $('form').on('submit', function (e) {
+        console.log("submit pressed");
+        e.preventDefault();
+
+        $.ajax({
+            type: 'post',
+            url: 'index.php',
+            data: $('form').serialize(),
+            success: function () {
+                var formInfo = 
+                    document.querySelector('#act_info');
+                formInfo.style.display = 'none';
+                var formTitle = 
+                    document.querySelector('#act_title');
+                formTitle.style.display = 'none';
+                var theFormItself = 
+                    document.getElementById('form');
+                theFormItself.style.display = 'none';
+                var formAgr = 
+                    document.querySelector('#agr');
+                formAgr.style.display = 'none';
+                var theSuccessMessage = 
+                    document.getElementById('success');  
+                theSuccessMessage.style.display = 'block';
+                // alert('form was submitted');
+
+            },
+            error: function () {
+                alert("Неудачная отправка формы! Проверьте данные.")
+            }
+        });
+
+        });
+
+      });
+    </script>
     <title>Главная</title>
 </head>
 <body>
@@ -55,13 +99,40 @@
             </div>
             <div class="header__buttons">
                 <div class="header__button header__button--red"><a href="#">Узнать подробнее</a></div>
-                <div class="header__button"><a href="#">Бесплатная консультация</a></div>
+                <div class="header__button" id="consult"><a href="#">Бесплатная консультация</a></div>
             </div>
         </div>
         
     </header>
 
     <main class="content">
+        <?php
+            $link = mysqli_connect('localhost', 'sungur', 'sungur05', 'engToch');
+            
+            function takeData($order_num, $link, $row) {
+                $order_query = "SELECT * FROM promo_prices WHERE promo_prices.order = $order_num";
+                $order_result = mysqli_query($link, $order_query) or die("Ошибка " . mysqli_error($link));
+                $res = mysqli_fetch_assoc($order_result);
+
+                switch ($row) {
+                    case 'price':
+                        echo $res["price"];
+                        break;
+                    case 'oldprice':
+                        echo $res["oldprice"];
+                        break;
+                    case 'prepay':
+                        echo $res["prepay"];
+                        break;
+                    case 'title':
+                        echo $res["title"];
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        ?>
         <div class="container">
             <div class="content__title">
                 <h2>Выберите свой вариант обучения</h2>
@@ -70,11 +141,11 @@
             <div class="content__cards">
                 <div class="content__card">
                     <div class="content__card-title">
-                        Один курс
+                        <?php takeData(1, $link, 'title') ?>
                     </div>
                     <div class="content__card-price">
-                        <p>10 900 Р <span class="content__card-sale">-56%</span></p>
-                        <p class="content__card-price--crossed">24 900 ₽</p>
+                        <p><?php takeData(1, $link, 'price') ?> Р<span class="content__card-sale">-56%</span></p>
+                        <p class="content__card-price--crossed"><?php takeData(1, $link, 'oldprice') ?> ₽</p>
                     </div>
                     <div class="content__card-info">
                         <ul class="content__card-list">
@@ -91,7 +162,7 @@
                     </div>
                     <div class="content__card-prepay">
                         <p class="content__card-prepay-text">Предоплата</p>
-                        <p class="content__card-prepay-price">900 ₽</p>
+                        <p class="content__card-prepay-price"><?php takeData(1, $link, 'prepay') ?> ₽</p>
                     </div>
                     <div class="content__card-buttons">
                         <div class="content__card-button">Внести предоплату из РФ</div>
@@ -101,11 +172,11 @@
 
                 <div class="content__card">
                     <div class="content__card-title">
-                        Два курса
+                        <?php takeData(2, $link, 'title') ?>
                     </div>
                     <div class="content__card-price">
-                        <p>21 900 Р <span class="content__card-sale">-60%</span></p>
-                        <p class="content__card-price--crossed">48 900 ₽</p>
+                        <p><?php takeData(2, $link, 'price') ?> Р <span class="content__card-sale">-60%</span></p>
+                        <p class="content__card-price--crossed"><?php takeData(2, $link, 'oldprice') ?> ₽</p>
                     </div>
                     <div class="content__card-info">
                         <ul class="content__card-list">
@@ -122,7 +193,7 @@
                     </div>
                     <div class="content__card-prepay">
                         <p class="content__card-prepay-text">Предоплата</p>
-                        <p class="content__card-prepay-price">900 ₽</p>
+                        <p class="content__card-prepay-price"><?php takeData(2, $link, 'prepay') ?> ₽</p>
                     </div>
                     <div class="content__card-buttons">
                         <div class="content__card-button">Внести предоплату из РФ</div>
@@ -132,11 +203,11 @@
 
                 <div class="content__card">
                     <div class="content__card-title">
-                        Три курса
+                        <?php takeData(3, $link, 'title') ?>
                     </div>
                     <div class="content__card-price">
-                        <p>28 900 Р <span class="content__card-sale">-61%</span></p>
-                        <p class="content__card-price--crossed">74 900 ₽</p>
+                        <p><?php takeData(3, $link, 'price') ?> Р <span class="content__card-sale">-61%</span></p>
+                        <p class="content__card-price--crossed"><?php takeData(3, $link, 'oldprice') ?> ₽</p>
                     </div>
                     <div class="content__card-info">
                         <ul class="content__card-list">
@@ -153,7 +224,7 @@
                     </div>
                     <div class="content__card-prepay">
                         <p class="content__card-prepay-text">Предоплата</p>
-                        <p class="content__card-prepay-price">900 ₽</p>
+                        <p class="content__card-prepay-price"><?php takeData(3, $link, 'prepay') ?> ₽</p>
                     </div>
                     <div class="content__card-buttons">
                         <div class="content__card-button">Внести предоплату из РФ</div>
@@ -163,11 +234,11 @@
 
                 <div class="content__card">
                     <div class="content__card-title">
-                        Пять курсов
+                        <?php takeData(4, $link, 'title') ?>
                     </div>
                     <div class="content__card-price">
-                        <p>44 900 Р <span class="content__card-sale">-65%</span></p>
-                        <p class="content__card-price--crossed">124 900 ₽</p>
+                        <p><?php takeData(4, $link, 'price') ?> Р <span class="content__card-sale">-65%</span></p>
+                        <p class="content__card-price--crossed"><?php takeData(4, $link, 'oldprice') ?> ₽</p>
                     </div>
                     <div class="content__card-info">
                         <ul class="content__card-list">
@@ -184,7 +255,7 @@
                     </div>
                     <div class="content__card-prepay">
                         <p class="content__card-prepay-text">Предоплата</p>
-                        <p class="content__card-prepay-price">900 ₽</p>
+                        <p class="content__card-prepay-price"><?php takeData(4, $link, 'prepay') ?> ₽</p>
                     </div>
                     <div class="content__card-buttons">
                         <div class="content__card-button">Внести предоплату из РФ</div>
@@ -200,16 +271,43 @@
         </div>
         <div class="content__action">
             <div class="content__action-title">
-                <h3 class="content__action-heading">Еще думаете?</h3>
-                <p class="content__action-info">Записывайтесь на бесплатный урок и попробуйте сами, это поможет принять решение</p>
+                <h3 class="content__action-heading" id="act_title">Еще думаете?</h3>
+                <p class="content__action-info" id="act_info">Записывайтесь на бесплатный урок и попробуйте сами, это поможет принять решение</p>
             </div>
-            <form action="post" class="content__form">
-                <input name="name" id="name" type="text" placeholder="Введите ваше имя" required/>
-                <input name="phone" id="phone" type="tel" placeholder="Введите ваш телефон" pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}" max-length="15" required />
-                <input name="email" id="email" type="email" placeholder="Введите ваш email" required/>
-                <button class="content__form-button" type="button">Записаться</button>
+            <form method="POST"  action="" class="content__form form" id="form" >
+                <input name="name" id="name" type="text" placeholder="Введите ваше имя" maxlength="45" required/>
+
+                <input 
+                    name="phone" 
+                    id="phone" type="tel" 
+                    placeholder="Введите ваш телефон" 
+                    pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{3,10}$"
+                    max-length="15" 
+                    required 
+                />
+
+                <input name="email" id="email" type="email" placeholder="Введите ваш email" maxlength="45" required/>
+
+
+                <!-- <button class="content__form-button" name="button" type="submit" id="formSubmit">Записаться</button> -->
+                <input class="content__form-button" name="button" type="submit" id="formSubmit" value="Записаться">
             </form>
-            <div class="content__action-agreement">
+            <p id="success">Заявка успешно отправлена!!!</p>
+            
+            <?php 
+                // if (isset($_POST['button']) && $_POST['button'] == "Записаться") 
+                if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' &&
+                !empty($_POST['name']) && !empty($_POST['phone']) && !empty($_POST['email'])){
+                    $link1 = mysqli_connect('localhost', 'sungur', 'sungur05', 'engToch');
+                    $currTime = new DateTime();
+                    $dateRes = $currTime->format('Y-m-d H:i:s');
+                    // $currTime->setTimezone(new DateTimeZone('Europe/Moscow')); 
+                    $query1 ="INSERT INTO applications (`timestamp`, `name`, `phone`, `email`) VALUES('".$dateRes."', '".$_POST['name']."', ".$_POST['phone'].",'".$_POST['email']."')";
+                    $result = mysqli_query($link, $query1) or die("Ошибка " . mysqli_error($link));
+                    
+                }
+            ?>
+            <div class="content__action-agreement" id="agr">
                 Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности
             </div>
         </div>
@@ -237,6 +335,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="js/index.js"></script>
 
 </body>
 </html>
