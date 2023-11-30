@@ -333,6 +333,10 @@ a {
     border: none;
 
     background-color: #e10000;
+ 
+    cursor: pointer;
+
+    z-index: 10;
 }
 .header__button--red > a {
     color: #fff;
@@ -361,6 +365,7 @@ a {
 
 .left_image {
     position: absolute;
+    z-index: 9;
 }
 
 
@@ -460,7 +465,7 @@ a {
 .content__card-price {
     position: relative;
 
-    width: 216px;
+    width: 200px;
 
     margin-top: 32px;
 
@@ -749,6 +754,8 @@ a {
     margin-top: 96px;
 
     background-color: #f5c618;
+
+    color: #151515;
 }
 @media (min-width: 786px) and (max-width: 1140px) {
     .content__action {
@@ -1075,4 +1082,17 @@ a {
     .footer__socials {
         margin-top: 30px;
     }
+}
+
+.none {
+    display: none;
+}
+
+#success {
+    display: none;
+    font-family: 'Helvetica Neue';
+    font-weight: 500;
+
+    font-size: 40px;
+
 }
